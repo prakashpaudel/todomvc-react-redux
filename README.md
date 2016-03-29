@@ -33,6 +33,13 @@
 
     - Todos (array)
       - Todo (object)
-        - id, text, status (active, complete, editing)
+        - id, text, complete
     - Filter (string)
       - all, completed, active
+      
+**Actions**
+  
+    - Todo
+      - add, complete, edit, delete
+    - Filter
+      - set filter
