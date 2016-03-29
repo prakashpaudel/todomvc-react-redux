@@ -5,17 +5,27 @@ const todos = (state = [], action) => {
 				...state, {
 					id: action.id,
 					text: action.text,
-					status: 'active'
+					complete: false
 				}
 			]
-		case 'SET_TODO_STATUS':
+		case 'TOGGLE_TODO':
 			return state.map(todo => {
 				if (todo.id === action.id)
-					return { ...todo, status: action.status }
+					return { ...todo, complete: !todo.complete }
 				return todo
 			})
+		case 'EDIT_TODO':
+			return state.map(todo => {
+				if (todo.id === action.id)
+					return { ...todo, text: action.text }
+				return todo
+			})
+		case 'DELETE_TODO':
+			return state.filter(todo => {
+				return !(todo.id === action.id)
+			})
 		default:
-			return state;
+			return state
 	}
 }
 

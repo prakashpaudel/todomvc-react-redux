@@ -1,42 +1,22 @@
-import React, { Component } from 'react'
+import React, { PropTypes } from 'react'
 import Todo from './Todo'
 
-const todos = [
-	{
-		id: 1,
-		text: "Start this app",
-		status: "active"
-	},
-	{
-		id: 2,
-		text: "End this app",
-		status: "complete"
-	}
-]
-
-function onTodoClick (id) {
-	todos.map(todo => {
-		if(todo.id === id)
-					console.log(todo)
-			return {...todo, text: "clicked"};
-		return todo
-	})
-}
-
-
-const TodoList = () => {
+const TodoList = (props) => {
 	return (
 		<ul>
-			{todos.map(todo => 
+			{props.todos.map(todo => 
 				<Todo key={todo.id}
-							id={todo.id}
 							text={todo.text}
-							status={todo.status}
-							onClick={onTodoClick} />
+							complete={todo.complete}
+							onClick={(id) => props.onTodoClick(todo.id)} />
 			)}
-			
 		</ul>
 	)
+}
+
+TodoList.propTypes = {
+	todos: PropTypes.array.isRequired,
+	onTodoClick: PropTypes.func.isRequired
 }
 
 export default TodoList
